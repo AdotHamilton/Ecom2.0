@@ -18,6 +18,17 @@ module.exports.getManyById = async (req, res) => {
 
 };
 
+module.exports.getProductsByCategory = (req, res) => {
+    const category = req.params.category;
+
+    Product.find({ "category": category })
+        .then(products => res.json({products: products}))
+        .catch(err => {
+            console.log(err);
+            res.json({ message: "Server error", error: err })
+        })
+};
+
 
 module.exports.getProductById = (req, res, id) => {
     Product.findOne({ _id: req.params.id })

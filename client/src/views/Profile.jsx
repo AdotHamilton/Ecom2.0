@@ -69,12 +69,13 @@ const Profile = (props) => {
                 
                 <div className="profile__left">
                     <div className="profile__top">
-                        <h2>{user.userName}</h2> 
                         <Image src={pfp} roundedCircle />
+                        <h2>{user.userName}</h2> 
+                        
                     </div>
                     <div className="profile__bottom">
-                        
-                            <label htmlFor="email">Email: </label><br></br>
+
+                            <label htmlFor="email">Email: </label>
                             <input onChange={handleInputChange} type="text" placeholder={user.email} className="form-control" name="email"/><br />
                             {errors.email ? <p className="profile__errors">{errors.email}</p> : ""}
                         

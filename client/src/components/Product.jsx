@@ -16,13 +16,11 @@ const Product = props => {
     
     return (
         <div id="productTile" className="">
-            <h4>{props.product.name}</h4>
-            <img src={props.product.imageUrl} alt={props.product.name}></img>
-            <h4>${props.product.price}</h4>
-            <div id="productActions"><span className="d-flex justify-content-around">
-                <button id={"add"+ props.product._id}onClick={onSubmitHandler} className="btn btn-primary">Add <FontAwesomeIcon icon={faShoppingCart} /></button>
-                <Link to={"/products/" + formatted_name} >Details</Link> 
-            </span></div>
+            <Link to={"/products/"+formatted_name}>
+            <img src={props.product.imageUrl} alt={props.product.name}/>
+            <h4><b>{props.product.name}</b></h4>
+            <p>${props.product.price}</p>
+            </Link>
         </div>
     )
 };

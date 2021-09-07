@@ -37,6 +37,7 @@ const Cart = props => {
   
     const handleSubmit = async (event) => {
       document.getElementById("submit").style.display = "none";
+      document.getElementById("spinner").style.visibility = "visible"
       if (!stripe || !elements) {
         return;
       }
@@ -57,10 +58,13 @@ const Cart = props => {
         setMessage("Something went wrong. Please Try again.")
       } else {
         if (result.paymentIntent.status === 'succeeded') {
-          console.log('Money is in the bank!');
-
           clearCart();
-          document.getElementById("cart__left").innerHTML = "<h2>Checkout Success!</h2>"
+          document.getElementById('spinner').style.visibility = "hidden"
+          document.getElementById("cart__left").style.display = "none"
+          var node = document.createElement("h2");
+          var message = document.createTextNode("Chekout Success!")
+          node.appendChild(message)
+          document.getElementById("checkout").appendChild(node)
         } else {
           document.getElementById("submit").style.display = "block";
 
@@ -91,8 +95,10 @@ const Cart = props => {
             <p>We will never store your payment information<br /> <i>All purchases are handled through Stripe</i></p>
             <span>
               <h3>Total: ${handleAmount()}</h3>
-              <button id="submit" className="btn btn-primary" onClick={handleSubmit}>Finish and Pay</button><br/>
-              
+              <button id="submit" className="" onClick={handleSubmit}>Finish and Pay</button><br/>
+              <div className="spinner-border" id="spinner" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
             </span>
             
             {
